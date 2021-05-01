@@ -1,11 +1,11 @@
 // require Express.js
 const express = require('express');
-
+const path = require('path');
 const PORT = process.env.PORT || 3001;
 const apiRoutes = require('./routes/apiRoutes');
 const htmlRoutes = require('./routes/htmlRoutes');
 
-const { notes } = require('/db/db.json');
+const { notes } = require('./db/db.json');
 
 // instantiate the server
 const app = express();
@@ -21,7 +21,7 @@ app.use(express.json());
 // as a result: all front-end code can now be accessed w/o having specific server endpoint created for it
 app.use(express.static('public'));
 
-// tell the server that any time client navigates to <ourhost>/api, app will use router we setup in apiRoutes
+// tell the server that any time client navigates to <host>/api, app will use router we setup in apiRoutes
 // if / is endpoint, router will serve back HTML routes
 app.use('/api', apiRoutes);
 app.use('/', htmlRoutes);
