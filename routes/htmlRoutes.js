@@ -1,4 +1,4 @@
-var router = require('express').Router();
+var router = express.Router();
 const path = require('path');
 const express = require('express');
 
