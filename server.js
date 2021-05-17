@@ -1,5 +1,6 @@
 // require Express.js
 const express = require('express');
+const fs = require('fs');
 const path = require('path');
 const PORT = process.env.PORT || 3001;
 const apiRoutes = require('./routes/apiRoutes');
@@ -26,9 +27,6 @@ app.use(express.static('public'));
 app.use('/api', apiRoutes);
 app.use('/', htmlRoutes);
 
-app.use((req, res) => {
-    res.status(400).end();
-});
 
 // chain listen() method onto server to tell it listen for requests
 app.listen(PORT, () => {

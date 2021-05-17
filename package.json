@@ -11,6 +11,7 @@
   "dependencies": {
     "express": "^4.16.4",
     "nanoid": "^3.1.22",
+    "shortid": "^2.2.16",
     "uniqid": "^5.3.0"
   }
 }
