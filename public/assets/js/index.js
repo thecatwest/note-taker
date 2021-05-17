@@ -33,13 +33,13 @@ const getNotes = () =>
     },
   });
 
-const saveNote = (noteContent) =>
+const saveNote = (note) =>
   fetch('/api/notes', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(noteContent),
+    body: JSON.stringify(note),
   });
 
 const deleteNote = (id) =>
@@ -82,8 +82,8 @@ const handleNoteDelete = (e) => {
   // prevents the click listener for the list from being called when the button inside of it is clicked
   e.stopPropagation();
 
-  const noteContent = e.target;
-  const noteId = JSON.parse(noteContent.parentElement.getAttribute('data-note')).id;
+  const note = e.target;
+  const noteId = JSON.parse(note.parentElement.getAttribute('data-note')).id;
 
   if (activeNote.id === noteId) {
     activeNote = {};
@@ -157,15 +157,15 @@ const renderNoteList = async (notes) => {
     noteListItems.push(createLi('No saved Notes', false));
   }
 
-  jsonNotes.forEach((noteContent) => {
-    const li = createLi(noteContent.title);
-    li.dataset.noteContent = JSON.stringify(noteContent);
+  jsonNotes.forEach((note) => {
+    const li = createLi(note.title);
+    li.dataset.noteContent = JSON.stringify(note);
 
     noteListItems.push(li);
   });
 
   if (window.location.pathname === '/notes') {
-    noteListItems.forEach((noteContent) => noteList[0].append(noteContent));
+    noteListItems.forEach((note) => noteList[0].append(note));
   }
 };
 

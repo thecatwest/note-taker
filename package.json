@@ -4,14 +4,27 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
+    "fs": "0.0.1-security",
     "nanoid": "^3.1.22",
+    "short-unique-id": "^4.3.3",
     "shortid": "^2.2.16",
     "uniqid": "^5.3.0"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thecatwest/miniature-eureka.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/thecatwest/miniature-eureka/issues"
+  },
+  "homepage": "https://github.com/thecatwest/miniature-eureka#readme"
 }

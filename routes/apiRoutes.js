@@ -1,25 +1,20 @@
 const { notes } = require('../db/db.json');
+const { saveNewNote, findById, validateNote, deleteNote } = require('../db/notes.js');
 
 // start instance of Router
 const router = require('express').Router();
-// imports
+
 // add unique ids to notes
-var shortid = require('shortid');
+const { default: ShortUniqueId } = require('short-unique-id');
+const uid = new ShortUniqueId();
 
-const { findById, saveNewNote, validateNote, deleteNote } = require('../db/notes.js');
-
-
-
-
-
-// route function to append /api to each url
 router.get('/notes', (req, res) => {
     let results = notes;
 
     res.json(results);
 });
 
-router.get('/notes:id', (req, res) => {
+router.post('/notes:id', (req, res) => {
     const result = findById(req.params.id, notes)
     if (result) {
         res.json(result);
@@ -31,7 +26,7 @@ router.get('/notes:id', (req, res) => {
 
 router.post('/notes', (req, res) => {
     // set unique id for note and append
-    req.body.id = shortid.generate();
+    req.body.id = uid();
     // validate data and deny if fields are empty
     if(!validateNote(req.body)) {
         res.status(404).send("Please complete each text field before saving.")
@@ -39,22 +34,11 @@ router.post('/notes', (req, res) => {
         const note = saveNewNote(req.body, notes);
         res.json(note);
     }
-    // const note = req.body;
-    // db.get("notes").push({
-    //     ...note,
-    //     id: nanoid(6)
-    // }).write();
-    // res.json({ success: true });
 });
 
-router.post('/notes/:id', (req, res) => {
+router.get('/notes/:id', (req, res) => {
     const results = findById(req.param.id, notes);
-
-    if (result) {
         res.json(results);
-    } else {
-        res.sendStatus(`Error: ${statusText}`);
-    };
 });
 
 router.delete('/notes/:id', (req, res) => {

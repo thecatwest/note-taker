@@ -1,12 +1,12 @@
 // require Express.js
 const express = require('express');
-const fs = require('fs');
+// const fs = require('fs');
 const path = require('path');
-const PORT = process.env.PORT || 3001;
 const apiRoutes = require('./routes/apiRoutes');
 const htmlRoutes = require('./routes/htmlRoutes');
+const PORT = process.env.PORT || 3001;
 
-const { notes } = require('./db/db.json');
+// const { notes } = require('./db/db.json');
 
 // instantiate the server
 const app = express();
@@ -27,7 +27,10 @@ app.use(express.static('public'));
 app.use('/api', apiRoutes);
 app.use('/', htmlRoutes);
 
-
+// if user request is not found, send 404
+app.use((req, res) => {
+    res.status(404).end();
+});
 // chain listen() method onto server to tell it listen for requests
 app.listen(PORT, () => {
     console.log(`Server now on port ${PORT}!`);
