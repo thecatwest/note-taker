@@ -1,11 +1,13 @@
+const { notes } = require('../db/db.json');
+
 // start instance of Router
 const router = require('express').Router();
 // imports
-const { notes } = require('../db/db.json');
-const { saveNote, findById, validateNote, deleteNote } = require('../db/notes');
-
 // add unique ids to notes
 var shortid = require('shortid');
+
+const { findById, saveNewNote, validateNote, deleteNote } = require('../db/notes.js');
+
 
 
 
@@ -21,6 +23,7 @@ router.get('/notes:id', (req, res) => {
     const result = findById(req.params.id, notes)
     if (result) {
         res.json(result);
+        console.log(result);
     } else {
         res.send(404);
     }
@@ -33,7 +36,7 @@ router.post('/notes', (req, res) => {
     if(!validateNote(req.body)) {
         res.status(404).send("Please complete each text field before saving.")
     } else {
-        const note = saveNote(req.body, notes);
+        const note = saveNewNote(req.body, notes);
         res.json(note);
     }
     // const note = req.body;

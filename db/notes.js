@@ -1,11 +1,14 @@
 const fs = require('fs');
 const path = require('path');
-const { notes } = require('./db.json');
+const {notes} = require('./db.json');
 
 // function to create a new note
 function saveNewNote(body, dbArray) {
     // function's main code will go here
+    console.log(dbArray);
+
     const noteContent = body;
+
     dbArray.push(noteContent);
     // using fs.writeFileSync() (synchronous version of fs.writeFil()) to write to db.json
     fs.writeFileSync(
@@ -16,7 +19,7 @@ function saveNewNote(body, dbArray) {
       JSON.stringify({ notes: dbArray }, null, 2)
     );
     // return finished code to post route for response
-    return console.log(`Note ${note.title} has been added successfully.`);
+    return console.log(`Note ${noteContent.title} has been added successfully.`);
 }
 
 function findById(id, dbArray) {
@@ -42,14 +45,14 @@ function deleteNote(id, dbArray) {
 // function to validate data
 // in POST route's callback before creating and adding data, it will now pass through this function above
 // if any data fails validation, the note will not be created (see app.post for error)
-function validateNote(note) {
-    if (!note.title) {
+function validateNote(noteContent) {
+    if (!noteContent.title) {
         return false;
     }
-    if (!note.text) {
+    if (!noteContent.text) {
         return false;
     }
     return true;
 };
 
-module.exports = { saveNewNote, findById, deleteNote, validateNote };
+module.exports = { findById, saveNewNote, deleteNote, validateNote };
