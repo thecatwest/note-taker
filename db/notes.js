@@ -29,7 +29,7 @@ function findById(id, noteArray) {
 // delete a note from dbArray
 function deleteNote(id, noteArray) {
     var selectedNote = findById(id, noteArray);
-    var notesIndex = dbArray.indexOf(selectedNote);
+    var notesIndex = noteArray.indexOf(selectedNote);
 
     // remove note from array and create new dbArray
     newNoteArray = noteArray.splice(notesIndex, 1);

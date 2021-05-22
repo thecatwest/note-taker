@@ -14,7 +14,7 @@ router.get('/notes', (req, res) => {
     res.json(results);
 });
 
-router.post('/notes:id', (req, res) => {
+router.get('/notes/:id', (req, res) => {
     const result = findById(req.params.id, notes)
     if (result) {
         res.json(result);
@@ -36,14 +36,10 @@ router.post('/notes', (req, res) => {
     }
 });
 
-router.get('/notes/:id', (req, res) => {
-    const results = findById(req.param.id, notes);
-        res.json(results);
-});
-
 router.delete('/notes/:id', (req, res) => {
-    const results = deleteNote(req.param.id, notes);
-    res.json(results);
+    console.log(req.params);
+    const result = deleteNote(req.params.id, notes);
+    res.json(result);
 });
 
 module.exports = router;
