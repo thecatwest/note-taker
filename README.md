@@ -23,6 +23,8 @@
 
 Start server with node index.js. Then, point browser to http://localhost:3001 to run the app locally.
 
+Link to live app: https://safe-wildwood-70392.herokuapp.com/
+
 https://github.com/thecatwest/note-taker
 
 <h5 class="text-dark">
